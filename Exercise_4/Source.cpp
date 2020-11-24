@@ -21,7 +21,24 @@ void AlternateSplit(int*&A, int n , int*& B , int*& C , int& sB, int& sC)
 	delete[] A;
 	A = NULL;
 }
-
+int* AlternateMerge(int*& B, int*& C, int& sB, int& sC)
+{
+	int n = sB + sC;
+	int* A = new int[n];
+	int j = 0 , k = 0;
+	for (int i = 0; i < n;i++)
+	{
+		if (i % 2 == 0)
+		{
+			A[i] = B[j++];
+		}
+		else
+		{
+			A[i] = C[k++];
+		}
+	}
+	return A;
+}
 int main()
 {
 	int n;
@@ -43,6 +60,11 @@ int main()
 		cout << Y[i] << " ";
 	cout << endl;
 	cout << "A = "<<A << endl;
+	int* Z = AlternateMerge(X, Y, sX, sY);
+	cout << "A = ";
+	for (int i = 0; i < n;i++)
+		cout << Z[i] << " ";
+	delete[] Z;
 	delete[] X;
 	delete[] Y;
 	return 0;
